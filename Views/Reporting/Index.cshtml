@@ -1,0 +1,33 @@
+﻿
+
+@{
+    ViewData["Title"] = "Reporting & Analytics";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Sales Analytics</h2>
+<canvas id="salesChart" width="400" height="200"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // In a real application, these values could be computed or fetched dynamically.
+    const salesLabels = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.SalesLabels ?? new[] { "Jan", "Feb", "Mar", "Apr", "May" }));
+    const salesAmounts = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.SalesAmounts ?? new[] { 12000, 15000, 8000, 18000, 20000 }));
+
+    const ctx = document.getElementById('salesChart').getContext('2d');
+    const salesChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: salesLabels,
+            datasets: [{
+                label: 'Sales ($)',
+                data: salesAmounts,
+                backgroundColor: 'rgba(54, 162, 235, 0.6)'
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+</script>

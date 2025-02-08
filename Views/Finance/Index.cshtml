@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ERPSystem.Models.Finance.Transaction>
+@{
+    ViewData["Title"] = "Finance & Accounting";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Transactions</h2>
+<p>Total Reconciled Amount: <strong>@ViewBag.TotalReconciled.ToString("C")</strong></p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Report Format</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tx in Model)
+        {
+            <tr>
+                <td>@tx.TransactionDate.ToShortDateString()</td>
+                <td>@tx.Amount.ToString("C")</td>
+                <td>@tx.Description</td>
+                <td>@tx.ReportFormat</td>
+            </tr>
+        }
+    </tbody>
+</table>

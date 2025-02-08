@@ -1,0 +1,8 @@
+﻿@model ERPSystem.Models.HR.Employee
+@{
+    ViewData["Title"] = "Payroll Calculation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Payroll for @Model.FullName</h2>
+<p>Calculated Salary: <strong>@ViewBag.CalculatedSalary.ToString("C")</strong></p>
+<a href="/HR" class="btn btn-secondary">Back to Employee List</a>

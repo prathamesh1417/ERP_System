@@ -1,0 +1,25 @@
+﻿@model ERPSystem.Models.HR.Employee
+@{
+    ViewData["Title"] = "Employee Details";
+}
+
+<h2>Employee Details</h2>
+
+<div>
+    <h4>@Model.FullName</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Position</dt>
+        <dd class="col-sm-10">@Model.Position</dd>
+
+        <dt class="col-sm-2">Hire Date</dt>
+        <dd class="col-sm-10">@Model.HireDate.ToShortDateString()</dd>
+
+        <dt class="col-sm-2">Years of Service</dt>
+        <dd class="col-sm-10">@Model.YearsOfService</dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

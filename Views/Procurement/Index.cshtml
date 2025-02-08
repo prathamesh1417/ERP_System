@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ERPSystem.Models.Procurement.PurchaseOrder>
+@{
+    ViewData["Title"] = "Procurement Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Purchase Orders</h2>
+@if (TempData["ApprovalMessage"] != null)
+{
+    <div class="alert alert-info">
+        @TempData["ApprovalMessage"]
+    </div>
+}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Order Date</th>
+            <th>Total Amount</th>
+            <th>Vendor</th>
+            <th>Approval</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var po in Model)
+        {
+            <tr>
+                <td>@po.OrderDate.ToShortDateString()</td>
+                <td>@po.TotalAmount.ToString("C")</td>
+                <td>@po.Vendor?.VendorName</td>
+                <td>
+                    @if (po.RequiresApproval && !po.IsApproved)
+                    {
+                        <form asp-action="Approve" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@po.Id" />
+                            <button type="submit" class="btn btn-sm btn-warning">Approve</button>
+                        </form>
+                    }
+                    else if (po.IsApproved)
+                    {
+                        <span class="text-success">Approved</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

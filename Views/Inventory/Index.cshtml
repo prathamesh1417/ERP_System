@@ -1,0 +1,34 @@
+﻿@model IEnumerable<ERPSystem.Models.Inventory.Product>
+@{
+    ViewData["Title"] = "Inventory Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Inventory</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Stock Quantity</th>
+            <th>Alert</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>@item.Price.ToString("C")</td>
+                <td>@(item.Stock != null ? item.Stock.Quantity : 0)</td>
+                <td>
+                    @if (item.IsLowStock)
+                    {
+                        <span class="text-danger">Low Stock!</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
